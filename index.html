@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ANNA MAN – South Indian Superhero HQ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a2b3f 0, #050810 52%, #020308 100%);
+      color: #f9ffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 980px;
+      background: rgba(5, 10, 20, 0.9);
+      border-radius: 24px;
+      padding: 24px 26px 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 214, 0.2);
+      border: 1px solid rgba(0, 255, 214, 0.3);
+      position: relative;
+    }
+
+    .wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(0,255,214,0.6), rgba(0,180,255,0.3), rgba(255,196,0,0.4));
+      opacity: 0.25;
+      z-index: -1;
+      filter: blur(12px);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-size: 30px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px #00ffd4;
+    }
+
+    header .tagline {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    /* HERO PANEL */
+    .hero-panel {
+      background: radial-gradient(circle at top left, #12334b, #050a13 65%);
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid rgba(0, 255, 214, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-top {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero-avatar {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, #ffffff, transparent 55%),
+        conic-gradient(from 210deg, #ffdd55, #ff8a3c, #ffdd55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 18px rgba(255, 184, 0, 0.7);
+      position: relative;
+    }
+
+    .hero-avatar::after {
+      content: "⚡";
+      position: absolute;
+      bottom: -6px;
+      right: -2px;
+      font-size: 22px;
+      filter: drop-shadow(0 0 4px #ffe27a);
+    }
+
+    .hero-avatar span {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #241200;
+      text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    .hero-meta h2 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .hero-meta p {
+      font-size: 13px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,255,214,0.5);
+      background: rgba(2, 40, 38, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-description {
+      font-size: 13px;
+      opacity: 0.86;
+      line-height: 1.5;
+    }
+
+    /* POWER PANEL */
+    .power-panel {
+      background: radial-gradient(circle at top right, #163045, #050911 70%);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid rgba(0, 255, 214, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .power-panel h3 {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+
+    .powers-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .power-btn {
+      position: relative;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 255, 214, 0.6);
+      background: linear-gradient(135deg, #052a34, #063e4a);
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content:space-between;
+      cursor: pointer;
+      transition: 0.18s ease-out;
+      font-size: 13px;
+    }
+
+    .power-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .power-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, transparent 55%),
+                  radial-gradient(circle at bottom, #00ffd4, #007f6e);
+      box-shadow: 0 0 10px rgba(0, 255, 214, 0.6);
+    }
+
+    .power-label {
+      font-weight: 600;
+      color: #eaffff;
+    }
+
+    .power-note {
+      font-size: 11px;
+      opacity: 0.9;
+      color: #c9ffff;
+    }
+
+    .power-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 14px rgba(0, 255, 214, 0.4);
+    }
+
+    .power-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 0 5px rgba(0, 255, 214, 0.5);
+    }
+
+    /* CITY + CONSOLE */
+    .city-console-wrapper {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 14px;
+    }
+
+    .city {
+      position: relative;
+      border-radius: 16px;
+      border: 1px solid rgba(0,255,214,0.35);
+      padding: 14px 14px 18px;
+      background: radial-gradient(circle at top, #0a3042, #020812 65%);
+      
+      /* REQUIRED FIX FOR YOUR IMAGE */
+      background-size: cover;
+      background-position: center;
+      /* If using image: uncomment and replace
+      background-image: url('your-image.png');
+      */
+
+      overflow: hidden;
+    }
+
+    .city-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+
+    .cityline {
+      position: relative;
+      margin-top: 4px;
+      height: 90px;
+    }
+
+    .building {
+      position: absolute;
+      bottom: 0;
+      width: 40px;
+      border-radius: 3px 3px 0 0;
+
+      /* FIX — brighten slightly so glow/wave visible */
+      background: linear-gradient(to top, #02222f, #065a77);
+
+      box-shadow: 0 0 12px rgba(0,255,214,0.12);
+    }
+
+    .building::before {
+      content: "";
+      position: absolute;
+      inset: 6px 8px;
+      background-image:
+        radial-gradient(#0af 1px, transparent 0),
+        radial-gradient(#0af 1px, transparent 0);
+      background-size: 10px 10px;
+      opacity: 0.4;
+    }
+
+    .b1 { left: 18px; height: 54px; }
+    .b2 { left: 80px; height: 72px; }
+    .b3 { left: 140px; height: 62px; }
+    .b4 { left: 210px; height: 84px; }
+    .b5 { left: 270px; height: 48px; }
+
+    /* FIX — silhouette z-index */
+    .hero-silhouette {
+      position: absolute;
+      bottom: 0;
+      right: 26px;
+      width: 42px;
+      height: 70px;
+      border-radius: 50px 50px 10px 10px;
+      background: linear-gradient(to top, #f7b500, #ffdf7a);
+      box-shadow: 0 0 18px rgba(255, 210, 90, 0.7);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 6px;
+      z-index: 5; /* FIX */
+    }
+
+    .hero-silhouette span {
+      font-size: 26px;
+    }
+
+    .cape {
+      position: absolute;
+      bottom: 10px;
+      right: 16px;
+      width: 70px;
+      height: 40px;
+      background: radial-gradient(circle at left, #ff3b3b, #7b001b);
+      border-radius: 0 80px 10px 40px;
+      opacity: 0.9;
+    }
+
+    /* FIX — stronger shake */
+    .city.shake {
+      animation: shake 0.3s linear 2;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      80% { transform: translateX(-4px); }
+    }
+
+    .city.wave .cape {
+      animation: wave 0.5s ease-in-out 3;
+    }
+    @keyframes wave {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(-12deg) translateX(-4px); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* FIX — stronger glow */
+    .city.glow .building {
+      box-shadow: 0 0 28px rgba(0, 255, 214, 1);
+    }
+
+    .city.coffee {
+      animation: coffee-jitter 0.25s linear 5;
+    }
+    @keyframes coffee-jitter {
+      0%, 100% { transform: translateY(0) scale(1); }
+      25% { transform: translateY(-2px) scale(1.01); }
+      50% { transform: translateY(1px) scale(1.02); }
+      75% { transform: translateY(-1px) scale(0.99); }
+    }
+
+    /* Console */
+    .console {
+      border-radius: 16px;
+      border: 1px solid rgba(0,255,214,0.35);
+      padding: 12px 14px;
+      background: radial-gradient(circle at bottom, #061623, #02060c 70%);
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .console-label {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.8;
+      font-size: 11px;
+    }
+
+    .console-log {
+      margin-top: 4px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(1, 19, 26, 0.9);
+      border: 1px solid rgba(0,255,214,0.25);
+      min-height: 54px;
+      line-height: 1.5;
+      color: #b9fdf1;
+      overflow: hidden;
+    }
+
+    .console-line-prefix {
+      color: #00ffd4;
+      margin-right: 4px;
+    }
+
+    .power-count {
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    /* Discord button */
+    .discord-wrap {
+      margin-top: 12px;
+      text-align: right;
+    }
+
+    .dc-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: linear-gradient(135deg, #20263b, #121729);
+      color: #cdd4ff;
+      font-size: 13px;
+      cursor: not-allowed;
+      opacity: 0.6;
+      transition: 0.2s;
+    }
+
+    .dc-btn span {
+      font-size: 16px;
+    }
+
+    .dc-btn.unlocked {
+      cursor: pointer;
+      opacity: 1;
+      border-color: rgba(88, 101, 242, 0.9);
+      background: linear-gradient(135deg, #5865f2, #7b8bff);
+      box-shadow: 0 0 16px rgba(88, 101, 242, 0.75);
+      color: #ffffff;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .dc-btn.unlocked:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(88, 101, 242, 0.95);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 14px rgba(88,101,242,0.6); }
+      50% { box-shadow: 0 0 26px rgba(88,101,242,0.95); }
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .city-console-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .cityline {
+        height: 80px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        padding: 18px 16px 16px;
+      }
+      header h1 {
+        font-size: 24px;
+      }
+    }
+    .avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>ANNA&nbsp;MAN</h1>
+      <div class="tagline">South Indian Superhero • Atharva College • IIT Madras Online Squad</div>
+    </header>
+
+    <div class="grid">
+      <section class="hero-panel">
+        <div class="hero-top">
+          <div class="hero-avatar">
+            <img src="Anna.jpg", alt="Hero", class="avatar-img">
+          </div>
+          <div class="hero-meta">
+            <h2>Official Hero Profile</h2>
+            <p>By day: student. By night: the one-man defence system for all South Indian snacks and unstable Wi-Fi connections.</p>
+            <div class="hero-badges">
+              <div class="badge">South Indian OP</div>
+              <div class="badge">Atharva City</div>
+              <div class="badge">IITM Online Degree</div>
+              <div class="badge">Certified Naughty</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="hero-description">
+          When assignments attack and attendance drops to single digits, ANNA MAN descends from the hostel terrace
+          armed with idlis, sambar, and a dangerously strong filter coffee. Tonight’s mission:
+          <strong>drag you into Discord HQ.</strong>
+        </p>
+      </section>
+
+      <section class="power-panel">
+        <h3>Tap a power to deploy in the city</h3>
+        <div class="powers-grid">
+          <button class="power-btn" data-power="idli">
+            <div class="power-left">
+              <div class="power-icon">🛡️</div>
+              <div>
+                <div class="power-label">Idli Shield</div>
+                <div class="power-note">Blocks all useless drama + exam stress.</div>
+              </div>
+            </div>
+            <div>▶</div>
+          </button>
+
+          <button class="power-btn" data-power="sambar">
+            <div class="power-left">
+              <div class="power-icon">🌊</div>
+              <div>
+                <div class="power-label">Sambar Wave</div>
+                <div class="power-note">Area-of-effect attack on boring vibes.</div>
+              </div>
+            </div>
+            <div>▶</div>
+          </button>
+
+          <button class="power-btn" data-power="dosa">
+            <div class="power-left">
+              <div class="power-icon">🌀</div>
+              <div>
+                <div class="power-label">Dosa Glider</div>
+                <div class="power-note">Fast travel from lecture hall to DC server.</div>
+              </div>
+            </div>
+            <div>▶</div>
+          </button>
+
+          <button class="power-btn" data-power="coffee">
+            <div class="power-left">
+              <div class="power-icon">☕</div>
+              <div>
+                <div class="power-label">Filter Coffee Overdrive</div>
+                <div class="power-note">+200% focus, +400% talking speed.</div>
+              </div>
+            </div>
+            <div>▶</div>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <div class="city-console-wrapper">
+      <section class="city" id="city">
+        <div class="city-title">Anna City Status</div>
+        <div class="cityline">
+          <div class="building b1"></div>
+          <div class="building b2"></div>
+          <div class="building b3"></div>
+          <div class="building b4"></div>
+          <div class="building b5"></div>
+          <div class="cape"></div>
+          <div class="hero-silhouette"><span>🦸‍♂️</span></div>
+        </div>
+      </section>
+
+      <section class="console">
+        <div class="console-label">Power log</div>
+        <div class="console-log" id="consoleLog">
+          <span class="console-line-prefix">&gt;</span>
+          Waiting for ANNA MAN to deploy his first power…
+        </div>
+        <div class="power-count" id="powerCount">Unique powers used: 0 / 3 to unlock Discord HQ.</div>
+
+        <div class="discord-wrap">
+          <button class="dc-btn" id="dcBtn">
+            <span>💬</span>
+            <span id="dcText">Join HQ on Discord (locked)</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const city = document.getElementById('city');
+    const consoleLog = document.getElementById('consoleLog');
+    const powerCount = document.getElementById('powerCount');
+    const dcBtn = document.getElementById('dcBtn');
+    const dcText = document.getElementById('dcText');
+
+    const usedPowers = new Set();
+
+    const powerLines = {
+      idli: "IDLI SHIELD deployed. All incoming nonsense has been successfully bounced back to sender.",
+      sambar: "Sambar Wave unleashed. Boring plans dissolved instantly in a perfectly seasoned splash.",
+      dosa: "Dosa Glider online. Anna just speed-ran from Atharva campus straight into Discord lanes.",
+      coffee: "Filter Coffee Overdrive activated. Brain FPS: 240. Talking speed: dangerous."
+    };
+
+    const powerEffects = {
+      idli: () => {
+        flashClass('glow');
+      },
+      sambar: () => {
+        flashClass('wave');
+      },
+      dosa: () => {
+        flashClass('shake');
+      },
+      coffee: () => {
+        flashClass('coffee');
+      }
+    };
+
+    function flashClass(cls) {
+      city.classList.remove('shake', 'wave', 'glow', 'coffee');
+      void city.offsetWidth;
+      city.classList.add(cls);
+      setTimeout(() => {
+        city.classList.remove(cls);
+      }, 600);
+    }
+
+    function logLine(text) {
+      consoleLog.innerHTML =
+        '<span class="console-line-prefix">&gt;</span>' + text;
+    }
+
+    function updateCount() {
+      const count = usedPowers.size;
+      powerCount.textContent = `Unique powers used: ${count} / 3 to unlock Discord HQ.`;
+
+      if (count >= 3 && !dcBtn.classList.contains('unlocked')) {
+        dcBtn.classList.add('unlocked');
+        dcText.textContent = "Join HQ on Discord (unlocked)";
+      }
+    }
+
+    document.querySelectorAll('.power-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const power = btn.getAttribute('data-power');
+
+        usedPowers.add(power);
+        updateCount();
+
+        if (powerEffects[power]) {
+          powerEffects[power]();
+        }
+        logLine(powerLines[power] || 'Power deployed.');
+      });
+    });
+
+    dcBtn.addEventListener('click', () => {
+      if (!dcBtn.classList.contains('unlocked')) {
+        logLine("Access denied. Anna must use at least three different powers before HQ opens.");
+        return;
+      }
+      window.location.href = "https://discord.gg/8Ww34gTX";
+    });
+  </script>
+</body>
+</html>
